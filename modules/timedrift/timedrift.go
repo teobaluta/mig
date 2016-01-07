@@ -75,6 +75,19 @@ func init() {
 				},
 				Action: seccomp.ActAllow,
 			},
+			sandbox.FilterOperation{
+				FilterOn: []string{
+					"write",
+				},
+				Action: seccomp.ActAllow,
+				Conditions: []seccomp.ScmpCondition{
+					{
+						Argument: 0,
+						Op:       seccomp.CompareEqual,
+						Operand1: 0x01,
+					},
+				},
+			},
 		},
 	}
 	m.SandboxProfile = sandbox
